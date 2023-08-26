@@ -1,41 +1,40 @@
-![godfather](https://socialify.git.ci/deep5050/godfather/image?description=1&owner=1&pattern=Charlie%20Brown&theme=Dark)
+<!-- ![CalendarFusion](https://socialify.git.ci/deep5050/CalendarFusion/image?description=1&owner=1&pattern=Charlie%20Brown&theme=Dark) -->
+<!-- 
+![image](https://github.com/deep5050/random-shits-happen-here/assets/27947066/e517f3c6-90e5-4ad7-a919-2723f54ba54e) -->
 
-<p align="center">
-
-
-  <h3 align="center">PROJECT NAME</h3>
-
+<p align=center>
+  <p align=center>
+  <img align=center src=https://github.com/deep5050/random-shits-happen-here/assets/27947066/e517f3c6-90e5-4ad7-a919-2723f54ba54e width=250px >
+</p>
+  <h3 align="center">Calendar Fusion</h3>
   <p align="center">
-    Detailed description about this project
+    A python module to genrate fancy markdown table based calendar
   <br/>
 
 <br />
-  <a href="https://github.com/deep5050/godfather/graphs/contributors">
-  <img src="https://img.shields.io/github/contributors/deep5050/godfather.svg?style=flat-square">
+  <a href="https://github.com/deep5050/CalendarFusion/graphs/contributors">
+  <img src="https://img.shields.io/github/contributors/deep5050/CalendarFusion.svg?style=flat-square">
   </a>
-  <a href="https://github.com/deep5050/godfather/network/members">
-  <img src="https://img.shields.io/github/forks/deep5050/godfather.svg?style=flat-square">
+  <a href="https://github.com/deep5050/CalendarFusion/network/members">
+  <img src="https://img.shields.io/github/forks/deep5050/CalendarFusion.svg?style=flat-square">
   </a>
-  <a href="https://github.com/deep5050/godfather/stargazers">
-  <img src="https://img.shields.io/github/stars/deep5050/godfather.svg?style=flat-square">
+  <a href="https://github.com/deep5050/CalendarFusion/stargazers">
+  <img src="https://img.shields.io/github/stars/deep5050/CalendarFusion.svg?style=flat-square">
   </a>
-  <a href="https://github.com/deep5050/godfather/issues">
-  <img src="https://img.shields.io/github/issues/deep5050/godfather.svg?style=flat-square">
+  <a href="https://github.com/deep5050/CalendarFusion/issues">
+  <img src="https://img.shields.io/github/issues/deep5050/CalendarFusion.svg?style=flat-square">
   </a>
-  <a href="https://github.com/deep5050/godfather/blob/master/LICENSE.txt">
-  <img src="https://img.shields.io/github/license/deep5050/godfather.svg?style=flat-square">
+  <a href="https://github.com/deep5050/CalendarFusion/blob/master/LICENSE.txt">
+  <img src="https://img.shields.io/github/license/deep5050/CalendarFusion.svg?style=flat-square">
   </a> 
   <a href="https://linkedin.com/in/othneildrew">
   <img src="https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555">
   </a>
-        <br/><a href="https://github.com/deep5050/godfather"><strong>Explore the docs »</strong></a>
+        <br/><a href="https://github.com/deep5050/CalendarFusion"><strong>Explore the docs »</strong></a>
     <br />
-    <!-- <br /> -->
-    <a href="https://github.com/deep5050/godfather">View Demo</a>
+    <a href="https://github.com/deep5050/CalendarFusion/issues">Report Bug</a>
     ·
-    <a href="https://github.com/deep5050/godfather/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/deep5050/godfather/issues">Request Feature</a>
+    <a href="https://github.com/deep5050/CalendarFusion/issues">Request Feature</a>
   </p>
 </p>
 
@@ -45,90 +44,46 @@
 ## Table of Contents
 
 * [About the Project](#about-the-project)
-  * [Built With](#built-with)
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
 * [Usage](#usage)
-* [Roadmap](#roadmap)
 * [Version History](#version-history)
 * [Contributing](#contributing)
 * [Support](#support)
 * [License](#license)
 * [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
 * [Related Works](#related-works)
 
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+TODO
 
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need.
-
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should element DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue.
-
-A list of commonly used resources that I find helpful are listed in the acknowledgements.
-
-### Built With
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
-* [Laravel](https://laravel.com)
 
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+TODO
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-```sh
-npm install npm@latest -g
-```
+TODO
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-```sh
-git clone https://github.com/your_username_/Project-Name.git
-```
-3. Install NPM packages
-```sh
-npm install
-```
-4. Enter your API in `config.js`
-```JS
-const API_KEY = 'ENTER YOUR API';
-```
-
+TODO
 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
+TODO
 
 
-
-<!-- ROADMAP -->
-## Roadmap
-
-See the [open issues](https://github.com/deep5050/godfather/issues) for a list of proposed features (and known issues).
 
 
 ## Version History
@@ -166,23 +121,10 @@ Dipankar Pal - dipankarpal5050@gmail.com
 
 
 
-<!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Img Shields](https://shields.io)
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Pages](https://pages.github.com)
-* [Animate.css](https://daneden.github.io/animate.css)
-* [Loaders.css](https://connoratherton.com/loaders)
-* [Slick Carousel](https://kenwheeler.github.io/slick)
-* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
-* [Sticky Kit](http://leafo.net/sticky-kit)
-* [JVectorMap](http://jvectormap.com)
-* [Font Awesome](https://fontawesome.com)
-
-
-
 ## Related Works
+
+[Radioactive](https://github.com/deep5050/radio-active) : A CLI based internet radio player
+
 [NaughtyLust](https://github.com/deep5050/NaughtyLust) : Awesome Nautilus Scripts For Linux.
 
 [qikQR](https://github.com/deep5050/qikQR) : Minimal QR Code Generator App Made With Electron.
@@ -196,6 +138,6 @@ Dipankar Pal - dipankarpal5050@gmail.com
 </p>
 <p align=center>Happy Coding</p>
   
-<p align=center><img align=center  src="https://visitor-badge.laobi.icu/badge?page_id=deep5050.Mr.Dclutterer" alt="Visitors">  </p>
+<p align=center><img align=center  src="https://visitor-badge.laobi.icu/badge?page_id=deep5050.CalendarFusion" alt="Visitors">  </p>
 
 </div>

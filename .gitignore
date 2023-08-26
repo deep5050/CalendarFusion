@@ -1,0 +1,4 @@
+tests/
+CalendarFusion.egg-info/
+build/
+dist/
