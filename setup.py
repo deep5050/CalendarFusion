@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-
-from distutils.core import setup
+from setuptools import setup, find_packages
 
 setup(name='CalendarFusion',
       version='1.0',
@@ -9,6 +8,6 @@ setup(name='CalendarFusion',
       author_email='dipankarpal5050@gmail.com',
       url='http://github.com/deep5050/CalendarFusion',
       download_url='https://github.com/deep5050/CalendarFusion/tarball/master',
-      packages=['CalendarFusion'],
+      packages=find_packages(),
       license="MIT"
      )
