@@ -61,6 +61,7 @@ Display a Calendar as you like. Add links, styles, emojis, etc.
 `pip3 install CalendarFusion`
 
 
+
 ## Documentation
 
 See the [Docs](docs/CalendarFusion.md) here ⬅️ 
@@ -71,7 +72,8 @@ See the [Docs](docs/CalendarFusion.md) here ⬅️
 ### initialize
 
 ```python
-cf = CalendarFusion()
+from CalendarFusion import CalendarFusion
+cf = CalendarFusion.CalendarFusion()
 ```
 
 |Mon|Tue|Wed|Thu|Fri|Sat|Sun|
