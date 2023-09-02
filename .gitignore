@@ -1,4 +1,4 @@
-tests/
 CalendarFusion.egg-info/
 build/
 dist/
+CalendarFusion/__pycache__
