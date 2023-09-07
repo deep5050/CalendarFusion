@@ -33,6 +33,9 @@
     <a href="https://github.com/deep5050/CalendarFusion/issues">Request Feature</a>
   </p>
 </p>
+<p align=center>
+<img src=https://img.shields.io/pypi/dm/CalendarFusion?style=for-the-badge>
+</p>
 
 
 
