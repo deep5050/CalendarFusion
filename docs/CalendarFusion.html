@@ -26,93 +26,27 @@
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">import calendar
-from datetime import datetime
-
-
-def get_lang_dict(lang=&#34;en&#34;):
-    dic = {}
-    colnames = [&#34;Week&#34;, &#34;Mon&#34;, &#34;Tue&#34;, &#34;Wed&#34;, &#34;Thu&#34;, &#34;Fri&#34;, &#34;Sat&#34;, &#34;Sun&#34;]
-    colnames_ja = [&#34;週&#34;, &#34;月&#34;, &#34;火&#34;, &#34;水&#34;, &#34;木&#34;, &#34;金&#34;, &#34;土&#34;, &#34;日&#34;]
-    colnames_tw = [&#34;週&#34;, &#34;一&#34;, &#34;二&#34;, &#34;三&#34;, &#34;四&#34;, &#34;五&#34;, &#34;六&#34;, &#34;日&#34;]  # Taiwan
-    colnames_hi = [
-        &#34;सप्ताह&#34;,
-        &#34;सोम&#34;,
-        &#34;मंगल&#34;,
-        &#34;बुध&#34;,
-        &#34;गुरु&#34;,
-        &#34;शुक्र&#34;,
-        &#34;शनि&#34;,
-        &#34;रवि&#34;,
-    ]  # Hindi
-    colnames_bn = [
-        &#34;সপ্তাহ&#34;,
-        &#34;সোম&#34;,
-        &#34;মঙ্গল&#34;,
-        &#34;বুধ&#34;,
-        &#34;বৃহঃ&#34;,
-        &#34;শুক্র&#34;,
-        &#34;শনি&#34;,
-        &#34;রবি&#34;,
-    ]  # Bengali
-
-    if lang == &#34;en&#34;:
-        for col in colnames:
-            dic[col] = col
-    elif lang == &#34;tw&#34;:
-        for col, colja in zip(colnames, colnames_tw):
-            dic[col] = colja
-    elif lang == &#34;ja&#34;:
-        for col, colja in zip(colnames, colnames_ja):
-            dic[col] = colja
-    elif lang == &#34;hi&#34;:
-        for col, colja in zip(colnames, colnames_hi):
-            dic[col] = colja
-    elif lang == &#34;bn&#34;:
-        for col, colja in zip(colnames, colnames_bn):
-            dic[col] = colja
-    else:
-        for col in colnames:
-            dic[col] = col
-    return dic
-
-
-def generate_matrix(year, month, first_day=0):
-    cal = calendar.Calendar(firstweekday=first_day)
-    table = []
-    colnames = [&#34;Week&#34;, &#34;Mon&#34;, &#34;Tue&#34;, &#34;Wed&#34;, &#34;Thu&#34;, &#34;Fri&#34;, &#34;Sat&#34;, &#34;Sun&#34;]
-    if cal.firstweekday == 6:  # start from sunday
-        colnames = [&#34;Week&#34;, &#34;Sun&#34;, &#34;Mon&#34;, &#34;Tue&#34;, &#34;Wed&#34;, &#34;Thu&#34;, &#34;Fri&#34;, &#34;Sat&#34;]
-
-    header = colnames
-    table.append(header)
-
-    for days in cal.monthdatescalendar(year, month):
-        row = []
-        isoweek = days[0].isocalendar()[1]
-        row.append(isoweek)
-        for d in days:
-            row.append(d)
-        table.append(row)
-    return table
-
+<pre><code class="python">from datetime import datetime
+from lang import get_lang_dict
+from table import generate_matrix
 
 class CalendarFusion:
     &#34;&#34;&#34;This class will be used to generate a month&#39;s custom calendar views.&#34;&#34;&#34;
+
     def __init__(
         self,
-        year=datetime.now().year,
-        month=datetime.now().month,
-        start_from_sunday=False,
-        week_no=False,
-        fill_calendar=False,
-        lang=&#34;eng&#34;,
+        year: int = datetime.now().year,
+        month: int = datetime.now().month,
+        start_from_sunday: bool = False,
+        week_no: bool = False,
+        fill_calendar: bool = False,
+        lang: str = &#34;eng&#34;,
     ):
         &#34;&#34;&#34;Initialize a month&#39;s calendar.
 
         Args:
-            year (_type_, optional): Calendar year. Defaults to datetime.now().year.
-            month (_type_, optional): Calendar month. Defaults to datetime.now().month.
+            year (int, optional): Calendar year. Defaults to datetime.now().year.
+            month (int, optional): Calendar month. Defaults to datetime.now().month.
             start_from_sunday (bool, optional): Specifies if the first day of the week is sunday or not. Defaults to False (monday).
             week_no (bool, optional): Week no of the given month. Defaults to False.
             fill_calendar (bool, optional): Specifies if the the calendar should fill with previous and next month&#39;s dates. Defaults to False.
@@ -168,12 +102,12 @@ class CalendarFusion:
 
         return markdown_str
 
-    def style(self, style=&#34;bold&#34;, selected=[]) -&gt; str:
+    def style(self, style: str = &#34;bold&#34;, selected: list[datetime] = []) -&gt; str:
         &#34;&#34;&#34;Add styles to the dates.
 
         Args:
             style (str, optional): Formatting styles of the dates. options: bold,italic,strikeout,quote. Defaults to &#34;bold&#34;.
-            selected (list, optional): Apply formatting styles to the selected dates only. expects a list of dates Defaults to [].
+            selected (list[datetime], optional): Apply formatting styles to the selected dates only. expects a list of dates Defaults to [].
 
         Returns:
             str: Returns a markdown table as output.
@@ -212,11 +146,11 @@ class CalendarFusion:
 
         return markdown_str
 
-    def link(self, urls={}) -&gt; str:
+    def link(self, urls: dict[datetime, str] = {}) -&gt; str:
         &#34;&#34;&#34;Add custom links to the dates.
 
         Args:
-            urls (dict, optional): A dictionary with date:url format. Defaults to {}.
+            urls (dict[datetime,str], optional): A dictionary with date:url format. Defaults to {}.
 
         Returns:
             str: A formatted markdown calendar view with links attached to the selected dates.
@@ -252,16 +186,18 @@ class CalendarFusion:
 
     def selective(
         self,
-        selected=[],
+        selected: list[datetime] = [],
         selected_date_text: str = None,
         not_selected_date_text: str = &#34;&#34;,
     ) -&gt; str:
         &#34;&#34;&#34;Show selected dates on the calendar only.
 
         Args:
-            selected (list, optional): A list of dates to be shown on the calendar. Defaults to [].
-            selected_date_text (str, optional): Text to be shown in place of dates. if None it will be normal date otherwise any custom text even emojis. Defaults to None (date).
-            not_selected_date_text (str, optional): Text to be shown in place of non selected dates. defaults to blank otherwise any given text even emojis. Defaults to &#34;&#34; (blank).
+            selected (list[datetime], optional): A list of dates to be shown on the calendar. Defaults to [].
+            selected_date_text (str, optional): Text to be shown in place of dates. \
+            if None it will be normal date otherwise any custom text even emojis. Defaults to None (date).
+            not_selected_date_text (str, optional): Text to be shown in place of non selected dates. \
+                defaults to blank otherwise any given text even emojis. Defaults to &#34;&#34; (blank).
 
         Returns:
             str: Returns a markdown table view of the month.
@@ -302,7 +238,8 @@ class CalendarFusion:
 
         return markdown_str
 
-__all__ = [&#39;CalendarFusion&#39;]</code></pre>
+
+__all__ = [&#34;CalendarFusion&#34;]</code></pre>
 </details>
 </section>
 <section>
@@ -316,16 +253,16 @@ __all__ = [&#39;CalendarFusion&#39;]</code></pre>
 <dl>
 <dt id="CalendarFusion.CalendarFusion"><code class="flex name class">
 <span>class <span class="ident">CalendarFusion</span></span>
-<span>(</span><span>year=2023, month=9, start_from_sunday=False, week_no=False, fill_calendar=False, lang='eng')</span>
+<span>(</span><span>year: int = 2023, month: int = 9, start_from_sunday: bool = False, week_no: bool = False, fill_calendar: bool = False, lang: str = 'eng')</span>
 </code></dt>
 <dd>
 <div class="desc"><p>This class will be used to generate a month's custom calendar views.</p>
 <p>Initialize a month's calendar.</p>
 <h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>year</code></strong> :&ensp;<code>_type_</code>, optional</dt>
+<dt><strong><code>year</code></strong> :&ensp;<code>int</code>, optional</dt>
 <dd>Calendar year. Defaults to datetime.now().year.</dd>
-<dt><strong><code>month</code></strong> :&ensp;<code>_type_</code>, optional</dt>
+<dt><strong><code>month</code></strong> :&ensp;<code>int</code>, optional</dt>
 <dd>Calendar month. Defaults to datetime.now().month.</dd>
 <dt><strong><code>start_from_sunday</code></strong> :&ensp;<code>bool</code>, optional</dt>
 <dd>Specifies if the first day of the week is sunday or not. Defaults to False (monday).</dd>
@@ -342,20 +279,21 @@ __all__ = [&#39;CalendarFusion&#39;]</code></pre>
 </summary>
 <pre><code class="python">class CalendarFusion:
     &#34;&#34;&#34;This class will be used to generate a month&#39;s custom calendar views.&#34;&#34;&#34;
+
     def __init__(
         self,
-        year=datetime.now().year,
-        month=datetime.now().month,
-        start_from_sunday=False,
-        week_no=False,
-        fill_calendar=False,
-        lang=&#34;eng&#34;,
+        year: int = datetime.now().year,
+        month: int = datetime.now().month,
+        start_from_sunday: bool = False,
+        week_no: bool = False,
+        fill_calendar: bool = False,
+        lang: str = &#34;eng&#34;,
     ):
         &#34;&#34;&#34;Initialize a month&#39;s calendar.
 
         Args:
-            year (_type_, optional): Calendar year. Defaults to datetime.now().year.
-            month (_type_, optional): Calendar month. Defaults to datetime.now().month.
+            year (int, optional): Calendar year. Defaults to datetime.now().year.
+            month (int, optional): Calendar month. Defaults to datetime.now().month.
             start_from_sunday (bool, optional): Specifies if the first day of the week is sunday or not. Defaults to False (monday).
             week_no (bool, optional): Week no of the given month. Defaults to False.
             fill_calendar (bool, optional): Specifies if the the calendar should fill with previous and next month&#39;s dates. Defaults to False.
@@ -411,12 +349,12 @@ __all__ = [&#39;CalendarFusion&#39;]</code></pre>
 
         return markdown_str
 
-    def style(self, style=&#34;bold&#34;, selected=[]) -&gt; str:
+    def style(self, style: str = &#34;bold&#34;, selected: list[datetime] = []) -&gt; str:
         &#34;&#34;&#34;Add styles to the dates.
 
         Args:
             style (str, optional): Formatting styles of the dates. options: bold,italic,strikeout,quote. Defaults to &#34;bold&#34;.
-            selected (list, optional): Apply formatting styles to the selected dates only. expects a list of dates Defaults to [].
+            selected (list[datetime], optional): Apply formatting styles to the selected dates only. expects a list of dates Defaults to [].
 
         Returns:
             str: Returns a markdown table as output.
@@ -455,11 +393,11 @@ __all__ = [&#39;CalendarFusion&#39;]</code></pre>
 
         return markdown_str
 
-    def link(self, urls={}) -&gt; str:
+    def link(self, urls: dict[datetime, str] = {}) -&gt; str:
         &#34;&#34;&#34;Add custom links to the dates.
 
         Args:
-            urls (dict, optional): A dictionary with date:url format. Defaults to {}.
+            urls (dict[datetime,str], optional): A dictionary with date:url format. Defaults to {}.
 
         Returns:
             str: A formatted markdown calendar view with links attached to the selected dates.
@@ -495,16 +433,18 @@ __all__ = [&#39;CalendarFusion&#39;]</code></pre>
 
     def selective(
         self,
-        selected=[],
+        selected: list[datetime] = [],
         selected_date_text: str = None,
         not_selected_date_text: str = &#34;&#34;,
     ) -&gt; str:
         &#34;&#34;&#34;Show selected dates on the calendar only.
 
         Args:
-            selected (list, optional): A list of dates to be shown on the calendar. Defaults to [].
-            selected_date_text (str, optional): Text to be shown in place of dates. if None it will be normal date otherwise any custom text even emojis. Defaults to None (date).
-            not_selected_date_text (str, optional): Text to be shown in place of non selected dates. defaults to blank otherwise any given text even emojis. Defaults to &#34;&#34; (blank).
+            selected (list[datetime], optional): A list of dates to be shown on the calendar. Defaults to [].
+            selected_date_text (str, optional): Text to be shown in place of dates. \
+            if None it will be normal date otherwise any custom text even emojis. Defaults to None (date).
+            not_selected_date_text (str, optional): Text to be shown in place of non selected dates. \
+                defaults to blank otherwise any given text even emojis. Defaults to &#34;&#34; (blank).
 
         Returns:
             str: Returns a markdown table view of the month.
@@ -597,13 +537,13 @@ __all__ = [&#39;CalendarFusion&#39;]</code></pre>
 </details>
 </dd>
 <dt id="CalendarFusion.CalendarFusion.link"><code class="name flex">
-<span>def <span class="ident">link</span></span>(<span>self, urls={}) ‑> str</span>
+<span>def <span class="ident">link</span></span>(<span>self, urls: dict[datetime.datetime, str] = {}) ‑> str</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Add custom links to the dates.</p>
 <h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>urls</code></strong> :&ensp;<code>dict</code>, optional</dt>
+<dt><strong><code>urls</code></strong> :&ensp;<code>dict[datetime,str]</code>, optional</dt>
 <dd>A dictionary with date:url format. Defaults to {}.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
@@ -615,11 +555,11 @@ __all__ = [&#39;CalendarFusion&#39;]</code></pre>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def link(self, urls={}) -&gt; str:
+<pre><code class="python">def link(self, urls: dict[datetime, str] = {}) -&gt; str:
     &#34;&#34;&#34;Add custom links to the dates.
 
     Args:
-        urls (dict, optional): A dictionary with date:url format. Defaults to {}.
+        urls (dict[datetime,str], optional): A dictionary with date:url format. Defaults to {}.
 
     Returns:
         str: A formatted markdown calendar view with links attached to the selected dates.
@@ -655,18 +595,20 @@ __all__ = [&#39;CalendarFusion&#39;]</code></pre>
 </details>
 </dd>
 <dt id="CalendarFusion.CalendarFusion.selective"><code class="name flex">
-<span>def <span class="ident">selective</span></span>(<span>self, selected=[], selected_date_text: str = None, not_selected_date_text: str = '') ‑> str</span>
+<span>def <span class="ident">selective</span></span>(<span>self, selected: list[datetime.datetime] = [], selected_date_text: str = None, not_selected_date_text: str = '') ‑> str</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Show selected dates on the calendar only.</p>
 <h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>selected</code></strong> :&ensp;<code>list</code>, optional</dt>
+<dt><strong><code>selected</code></strong> :&ensp;<code>list[datetime]</code>, optional</dt>
 <dd>A list of dates to be shown on the calendar. Defaults to [].</dd>
 <dt><strong><code>selected_date_text</code></strong> :&ensp;<code>str</code>, optional</dt>
-<dd>Text to be shown in place of dates. if None it will be normal date otherwise any custom text even emojis. Defaults to None (date).</dd>
+<dd>Text to be shown in place of dates.
+if None it will be normal date otherwise any custom text even emojis. Defaults to None (date).</dd>
 <dt><strong><code>not_selected_date_text</code></strong> :&ensp;<code>str</code>, optional</dt>
-<dd>Text to be shown in place of non selected dates. defaults to blank otherwise any given text even emojis. Defaults to "" (blank).</dd>
+<dd>Text to be shown in place of non selected dates.
+defaults to blank otherwise any given text even emojis. Defaults to "" (blank).</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <dl>
@@ -679,16 +621,18 @@ __all__ = [&#39;CalendarFusion&#39;]</code></pre>
 </summary>
 <pre><code class="python">def selective(
     self,
-    selected=[],
+    selected: list[datetime] = [],
     selected_date_text: str = None,
     not_selected_date_text: str = &#34;&#34;,
 ) -&gt; str:
     &#34;&#34;&#34;Show selected dates on the calendar only.
 
     Args:
-        selected (list, optional): A list of dates to be shown on the calendar. Defaults to [].
-        selected_date_text (str, optional): Text to be shown in place of dates. if None it will be normal date otherwise any custom text even emojis. Defaults to None (date).
-        not_selected_date_text (str, optional): Text to be shown in place of non selected dates. defaults to blank otherwise any given text even emojis. Defaults to &#34;&#34; (blank).
+        selected (list[datetime], optional): A list of dates to be shown on the calendar. Defaults to [].
+        selected_date_text (str, optional): Text to be shown in place of dates. \
+        if None it will be normal date otherwise any custom text even emojis. Defaults to None (date).
+        not_selected_date_text (str, optional): Text to be shown in place of non selected dates. \
+            defaults to blank otherwise any given text even emojis. Defaults to &#34;&#34; (blank).
 
     Returns:
         str: Returns a markdown table view of the month.
@@ -731,7 +675,7 @@ __all__ = [&#39;CalendarFusion&#39;]</code></pre>
 </details>
 </dd>
 <dt id="CalendarFusion.CalendarFusion.style"><code class="name flex">
-<span>def <span class="ident">style</span></span>(<span>self, style='bold', selected=[]) ‑> str</span>
+<span>def <span class="ident">style</span></span>(<span>self, style: str = 'bold', selected: list[datetime.datetime] = []) ‑> str</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Add styles to the dates.</p>
@@ -739,7 +683,7 @@ __all__ = [&#39;CalendarFusion&#39;]</code></pre>
 <dl>
 <dt><strong><code>style</code></strong> :&ensp;<code>str</code>, optional</dt>
 <dd>Formatting styles of the dates. options: bold,italic,strikeout,quote. Defaults to "bold".</dd>
-<dt><strong><code>selected</code></strong> :&ensp;<code>list</code>, optional</dt>
+<dt><strong><code>selected</code></strong> :&ensp;<code>list[datetime]</code>, optional</dt>
 <dd>Apply formatting styles to the selected dates only. expects a list of dates Defaults to [].</dd>
 </dl>
 <h2 id="returns">Returns</h2>
@@ -751,12 +695,12 @@ __all__ = [&#39;CalendarFusion&#39;]</code></pre>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def style(self, style=&#34;bold&#34;, selected=[]) -&gt; str:
+<pre><code class="python">def style(self, style: str = &#34;bold&#34;, selected: list[datetime] = []) -&gt; str:
     &#34;&#34;&#34;Add styles to the dates.
 
     Args:
         style (str, optional): Formatting styles of the dates. options: bold,italic,strikeout,quote. Defaults to &#34;bold&#34;.
-        selected (list, optional): Apply formatting styles to the selected dates only. expects a list of dates Defaults to [].
+        selected (list[datetime], optional): Apply formatting styles to the selected dates only. expects a list of dates Defaults to [].
 
     Returns:
         str: Returns a markdown table as output.
