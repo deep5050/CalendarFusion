@@ -1,90 +1,28 @@
-import calendar
+#!/usr/bin/env python
+
 from datetime import datetime
 
-
-def get_lang_dict(lang="en"):
-    dic = {}
-    colnames = ["Week", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-    colnames_ja = ["週", "月", "火", "水", "木", "金", "土", "日"]
-    colnames_tw = ["週", "一", "二", "三", "四", "五", "六", "日"]  # Taiwan
-    colnames_hi = [
-        "सप्ताह",
-        "सोम",
-        "मंगल",
-        "बुध",
-        "गुरु",
-        "शुक्र",
-        "शनि",
-        "रवि",
-    ]  # Hindi
-    colnames_bn = [
-        "সপ্তাহ",
-        "সোম",
-        "মঙ্গল",
-        "বুধ",
-        "বৃহঃ",
-        "শুক্র",
-        "শনি",
-        "রবি",
-    ]  # Bengali
-
-    if lang == "en":
-        for col in colnames:
-            dic[col] = col
-    elif lang == "tw":
-        for col, colja in zip(colnames, colnames_tw):
-            dic[col] = colja
-    elif lang == "ja":
-        for col, colja in zip(colnames, colnames_ja):
-            dic[col] = colja
-    elif lang == "hi":
-        for col, colja in zip(colnames, colnames_hi):
-            dic[col] = colja
-    elif lang == "bn":
-        for col, colja in zip(colnames, colnames_bn):
-            dic[col] = colja
-    else:
-        for col in colnames:
-            dic[col] = col
-    return dic
-
-
-def generate_matrix(year, month, first_day=0):
-    cal = calendar.Calendar(firstweekday=first_day)
-    table = []
-    colnames = ["Week", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-    if cal.firstweekday == 6:  # start from sunday
-        colnames = ["Week", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-
-    header = colnames
-    table.append(header)
-
-    for days in cal.monthdatescalendar(year, month):
-        row = []
-        isoweek = days[0].isocalendar()[1]
-        row.append(isoweek)
-        for d in days:
-            row.append(d)
-        table.append(row)
-    return table
+from .lang import get_lang_dict
+from .table import generate_matrix
 
 
 class CalendarFusion:
     """This class will be used to generate a month's custom calendar views."""
+
     def __init__(
         self,
-        year=datetime.now().year,
-        month=datetime.now().month,
-        start_from_sunday=False,
-        week_no=False,
-        fill_calendar=False,
-        lang="eng",
+        year: int = datetime.now().year,
+        month: int = datetime.now().month,
+        start_from_sunday: bool = False,
+        week_no: bool = False,
+        fill_calendar: bool = False,
+        lang: str = "eng",
     ):
         """Initialize a month's calendar.
 
         Args:
-            year (_type_, optional): Calendar year. Defaults to datetime.now().year.
-            month (_type_, optional): Calendar month. Defaults to datetime.now().month.
+            year (int, optional): Calendar year. Defaults to datetime.now().year.
+            month (int, optional): Calendar month. Defaults to datetime.now().month.
             start_from_sunday (bool, optional): Specifies if the first day of the week is sunday or not. Defaults to False (monday).
             week_no (bool, optional): Week no of the given month. Defaults to False.
             fill_calendar (bool, optional): Specifies if the the calendar should fill with previous and next month's dates. Defaults to False.
@@ -140,12 +78,12 @@ class CalendarFusion:
 
         return markdown_str
 
-    def style(self, style="bold", selected=[]) -> str:
+    def style(self, style: str = "bold", selected: list[datetime] = []) -> str:
         """Add styles to the dates.
 
         Args:
             style (str, optional): Formatting styles of the dates. options: bold,italic,strikeout,quote. Defaults to "bold".
-            selected (list, optional): Apply formatting styles to the selected dates only. expects a list of dates Defaults to [].
+            selected (list[datetime], optional): Apply formatting styles to the selected dates only. expects a list of dates Defaults to [].
 
         Returns:
             str: Returns a markdown table as output.
@@ -184,11 +122,11 @@ class CalendarFusion:
 
         return markdown_str
 
-    def link(self, urls={}) -> str:
+    def link(self, urls: dict[datetime, str] = {}) -> str:
         """Add custom links to the dates.
 
         Args:
-            urls (dict, optional): A dictionary with date:url format. Defaults to {}.
+            urls (dict[datetime,str], optional): A dictionary with date:url format. Defaults to {}.
 
         Returns:
             str: A formatted markdown calendar view with links attached to the selected dates.
@@ -224,16 +162,18 @@ class CalendarFusion:
 
     def selective(
         self,
-        selected=[],
+        selected: list[datetime] = [],
         selected_date_text: str = None,
         not_selected_date_text: str = "",
     ) -> str:
         """Show selected dates on the calendar only.
 
         Args:
-            selected (list, optional): A list of dates to be shown on the calendar. Defaults to [].
-            selected_date_text (str, optional): Text to be shown in place of dates. if None it will be normal date otherwise any custom text even emojis. Defaults to None (date).
-            not_selected_date_text (str, optional): Text to be shown in place of non selected dates. defaults to blank otherwise any given text even emojis. Defaults to "" (blank).
+            selected (list[datetime], optional): A list of dates to be shown on the calendar. Defaults to [].
+            selected_date_text (str, optional): Text to be shown in place of dates. \
+            if None it will be normal date otherwise any custom text even emojis. Defaults to None (date).
+            not_selected_date_text (str, optional): Text to be shown in place of non selected dates. \
+                defaults to blank otherwise any given text even emojis. Defaults to "" (blank).
 
         Returns:
             str: Returns a markdown table view of the month.
@@ -274,4 +214,5 @@ class CalendarFusion:
 
         return markdown_str
 
-__all__ = ['CalendarFusion']
+
+__all__ = ["CalendarFusion"]
